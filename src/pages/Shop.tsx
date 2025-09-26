@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, Heart, SlidersHorizontal } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCartStore } from "@/store/cartStore";
+import { useGSAP } from "@/hooks/useGSAP";
+import { AnimatedSection, ScaleOnHover, StaggerChildren } from "@/components/animations/AnimatedSection";
+import { motion } from "framer-motion";
+import { toast } from "@/hooks/use-toast";
 
 // Mock product data with more items
 const products = [
@@ -63,8 +68,35 @@ const products = [
 const categories = ["All", "Formal Wear", "Shirts", "Outerwear", "Trousers", "Accessories", "Knitwear"];
 
 const Shop = () => {
+  const addToCartRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
+  const { addItem } = useCartStore();
+  const { animateCartAdd } = useGSAP();
+
+  const handleAddToCart = (product: typeof products[0], index: number) => {
+    // Add sophisticated cart animation
+    const buttonElement = addToCartRefs.current[index];
+    if (buttonElement) {
+      animateCartAdd(buttonElement);
+    }
+
+    // Add to cart
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      category: product.category
+    });
+
+    // Show elegant toast
+    toast({
+      title: "Added to Cart",
+      description: `${product.name} has been added to your cart.`,
+      duration: 3000,
+    });
+  };
 
   const filteredProducts = products.filter(product => 
     selectedCategory === "All" || product.category === selectedCategory
@@ -175,10 +207,19 @@ const Shop = () => {
 
                   {/* Add to Cart Button */}
                   <div className="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <Button className="w-full btn-luxury text-sm">
-                      <ShoppingBag className="h-4 w-4 mr-2" />
-                      Add to Cart
-                    </Button>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button 
+                        ref={(el) => addToCartRefs.current[index] = el}
+                        className="w-full btn-luxury text-sm luxury-btn"
+                        onClick={() => handleAddToCart(product, index)}
+                      >
+                        <ShoppingBag className="h-4 w-4 mr-2" />
+                        Add to Cart
+                      </Button>
+                    </motion.div>
                   </div>
                 </div>
 

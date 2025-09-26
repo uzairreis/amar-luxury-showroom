@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingBag, Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/store/cartStore";
+import { motion } from "framer-motion";
+import { useGSAP } from "@/hooks/useGSAP";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getTotalItems, openCart } = useCartStore();
+  useGSAP();
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -52,15 +57,28 @@ export const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="ghost" size="icon" className="hover:text-accent">
+            <Button variant="ghost" size="icon" className="hover:text-accent luxury-btn">
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover:text-accent relative">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
-              </span>
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="hover:text-accent relative luxury-btn"
+                onClick={openCart}
+              >
+                <ShoppingBag className="h-5 w-5" />
+                {getTotalItems() > 0 && (
+                  <motion.span 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                  >
+                    {getTotalItems()}
+                  </motion.span>
+                )}
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -110,11 +128,18 @@ export const Header = () => {
                 <Button variant="ghost" size="icon" className="hover:text-accent">
                   <Search className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon" className="hover:text-accent relative">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="hover:text-accent relative"
+                  onClick={openCart}
+                >
                   <ShoppingBag className="h-5 w-5" />
-                  <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    0
-                  </span>
+                  {getTotalItems() > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {getTotalItems()}
+                    </span>
+                  )}
                 </Button>
               </div>
             </div>

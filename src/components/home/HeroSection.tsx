@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useGSAP } from "@/hooks/useGSAP";
+import { AnimatedSection, FloatingElement } from "@/components/animations/AnimatedSection";
+import { motion } from "framer-motion";
 
 export const HeroSection = () => {
+  useGSAP();
+  
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden luxury-parallax">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -14,49 +20,91 @@ export const HeroSection = () => {
       
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-        <div className="fade-in-up">
-          <h2 className="font-accent text-3xl md:text-4xl lg:text-5xl text-accent mb-4">
+        <div className="luxury-fade-in">
+          <motion.h2 
+            className="font-accent text-3xl md:text-4xl lg:text-5xl text-accent mb-4 luxury-text-reveal"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
             Timeless Elegance
-          </h2>
-          <h1 className="font-luxury text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-wide">
+          </motion.h2>
+          
+          <motion.h1 
+            className="font-luxury text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-wide luxury-text-reveal"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
             AMAR
-          </h1>
-          <p className="text-lg md:text-xl mb-2 tracking-[0.2em] uppercase text-gray-200">
+          </motion.h1>
+          
+          <motion.p 
+            className="text-lg md:text-xl mb-2 tracking-[0.2em] uppercase text-gray-200 luxury-fade-in"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
             by REIS Enterprises
-          </p>
-          <p className="text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed text-gray-300">
+          </motion.p>
+          
+          <motion.p 
+            className="text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed text-gray-300 luxury-fade-in"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
             Discover our curated collection of luxury fashion that embodies old-money sophistication 
             and exotic elegance. Each piece is crafted for those who appreciate the finest things in life.
-          </p>
+          </motion.p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+          >
             <Link to="/shop">
-              <Button 
-                size="lg" 
-                className="btn-gold text-lg px-8 py-4 font-medium tracking-wide"
+              <motion.div
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Explore Collection
-              </Button>
+                <Button 
+                  size="lg" 
+                  className="btn-gold text-lg px-8 py-4 font-medium tracking-wide luxury-btn"
+                >
+                  Explore Collection
+                </Button>
+              </motion.div>
             </Link>
             <Link to="/about">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="btn-outline-luxury text-lg px-8 py-4 font-medium tracking-wide border-white text-white hover:bg-white hover:text-primary"
+              <motion.div
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Our Story
-              </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="btn-outline-luxury text-lg px-8 py-4 font-medium tracking-wide border-white text-white hover:bg-white hover:text-primary"
+                >
+                  Our Story
+                </Button>
+              </motion.div>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <FloatingElement className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
         <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+          <motion.div 
+            className="w-1 h-3 bg-white rounded-full mt-2"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
         </div>
-      </div>
+      </FloatingElement>
     </section>
   );
 };
