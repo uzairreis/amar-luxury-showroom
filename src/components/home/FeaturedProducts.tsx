@@ -53,7 +53,7 @@ export const FeaturedProducts = () => {
           {featuredProducts.map((product, index) => (
             <div 
               key={product.id} 
-              className={`card-product fade-in-up`}
+              className={`card-product group fade-in-up`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative overflow-hidden">

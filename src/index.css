@@ -160,7 +160,7 @@ Old-money sophistication with timeless elegance
   }
 
   .card-product {
-    @apply bg-card border border-border rounded-sm overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-105 group;
+    @apply bg-card border border-border rounded-sm overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-105;
   }
 
   /* Luxury Text Styles */

@@ -134,7 +134,7 @@ const Shop = () => {
             {filteredProducts.map((product, index) => (
               <div 
                 key={product.id} 
-                className="card-product fade-in"
+                className="card-product group fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="relative overflow-hidden">
