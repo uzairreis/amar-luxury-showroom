@@ -2,41 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* AMAR by REIS Enterprises - Luxury Design System
+Old-money sophistication with timeless elegance
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Old-Money Luxury Color Palette */
+    --background: 40 15% 97%; /* Ivory white */
+    --foreground: 0 0% 15%; /* Deep charcoal */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 40 12% 95%; /* Soft ivory */
+    --card-foreground: 0 0% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 40 15% 97%;
+    --popover-foreground: 0 0% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Deep Forest Green */
+    --primary: 150 25% 15%; /* Deep forest green */
+    --primary-foreground: 40 15% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Warm Beige */
+    --secondary: 35 20% 88%; /* Soft beige */
+    --secondary-foreground: 0 0% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted: Marble Gray */
+    --muted: 0 0% 92%; /* Marble gray */
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent: Gold */
+    --accent: 45 85% 47%; /* Luxury gold */
+    --accent-foreground: 0 0% 15%;
+
+    /* Luxury Brown */
+    --luxury-brown: 25 15% 25%; /* Dark brown */
+    --luxury-brown-foreground: 40 15% 97%;
+
+    /* Matte Black */
+    --luxury-black: 0 0% 8%; /* Matte black */
+    --luxury-black-foreground: 40 15% 97%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 40 15% 97%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 88%; /* Subtle borders */
+    --input: 0 0% 92%;
+    --ring: 45 85% 47%; /* Gold focus ring */
 
-    --radius: 0.5rem;
+    --radius: 0.25rem; /* Subtle rounded corners */
+
+    /* Luxury Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--luxury-brown)) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(45 75% 55%) 100%);
+    --gradient-elegant: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    
+    /* Luxury Shadows */
+    --shadow-luxury: 0 4px 20px hsla(var(--primary) / 0.15);
+    --shadow-gold: 0 4px 20px hsla(var(--accent) / 0.25);
+    --shadow-elegant: 0 2px 12px hsla(0 0% 0% / 0.08);
+
+    /* Typography */
+    --font-luxury: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --font-accent: 'Great Vibes', cursive;
+
+    /* Transitions */
+    --transition-luxury: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-elegant: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +132,103 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-luxury);
+  }
+}
+
+@layer components {
+  /* Luxury Button Variants */
+  .btn-luxury {
+    @apply bg-primary text-primary-foreground px-8 py-3 font-medium tracking-wide transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  .btn-gold {
+    @apply bg-accent text-accent-foreground px-8 py-3 font-medium tracking-wide transition-all duration-300 hover:shadow-xl hover:scale-105;
+  }
+
+  .btn-outline-luxury {
+    @apply border-2 border-primary text-primary bg-transparent px-8 py-3 font-medium tracking-wide transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-lg;
+  }
+
+  /* Luxury Cards */
+  .card-luxury {
+    @apply bg-card border border-border rounded-sm shadow-lg transition-all duration-300 hover:shadow-xl;
+  }
+
+  .card-product {
+    @apply bg-card border border-border rounded-sm overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-105 group;
+  }
+
+  /* Luxury Text Styles */
+  .text-luxury-heading {
+    font-family: var(--font-luxury);
+    @apply text-foreground font-semibold tracking-wide;
+  }
+
+  .text-accent-script {
+    font-family: var(--font-accent);
+    @apply text-accent;
+  }
+
+  /* Animations */
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl;
+  }
+
+  .hover-gold {
+    @apply transition-all duration-300 hover:text-accent;
+  }
+
+  /* Luxury Separators */
+  .luxury-divider {
+    @apply h-px bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
