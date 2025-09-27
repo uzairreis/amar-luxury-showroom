@@ -31,12 +31,17 @@ export const HeroSection = () => {
           </motion.h2>
           
           <motion.h1 
-            className="font-luxury text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-wide luxury-text-reveal"
+            className="font-luxury text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-wide luxury-text-reveal relative"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            AMAR
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(212,175,55,0.3)] relative z-10">
+              AMAR
+            </span>
+            <span className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent blur-sm opacity-50 animate-pulse">
+              AMAR
+            </span>
           </motion.h1>
           
           <motion.p 
